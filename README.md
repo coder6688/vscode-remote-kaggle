@@ -102,3 +102,49 @@ root: Kaggle username
 <path_to_the_remote_file>: File path on Kaggle
 Destination: <destination_path_in_local> (your local machine)
 ```
+
+## Creating Dataset from Hugging Face Model
+
+### Step 1: Install the Hugging Face CLI
+```bash
+pip install huggingface_hub
+```
+
+### Step 2: Login to Hugging Face
+```bash
+huggingface-cli login
+# Enter your HF token when prompted
+```
+
+### Step 3: Download the model files
+```bash
+# Create a directory for the dataset
+mkdir -p dataset/stable-diffusion-v2-1
+
+# Download model files
+huggingface-cli download stabilityai/stable-diffusion-2-1 \
+    --local-dir dataset/stable-diffusion-v2-1 \
+    --include "v2-1_768-ema-pruned.ckpt" \
+    --token <your_hf_token>
+```
+
+### Step 4: Create dataset metadata
+```bash
+# Create a dataset-metadata.json file
+cat > dataset/dataset-metadata.json << EOL
+{
+    "title": "Stable Diffusion v2.1 Model",
+    "id": "your-username/stable-diffusion-v2-1",
+    "licenses": [{"name": "CreativeML Open RAIL-M"}]
+}
+EOL
+```
+
+### Step 5: Create a new dataset on Kaggle
+1. Go to Kaggle Datasets
+2. Click "New Dataset"
+3. Upload the entire `dataset` folder
+4. Set metadata and publish
+
+The dataset will now be available as: `your-username/stable-diffusion-v2-1`
+
