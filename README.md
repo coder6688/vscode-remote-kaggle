@@ -37,7 +37,7 @@ conda activate ldm
 
 ## Step 4: download stable-diffusion pretrained model
 ```
-wget --header=<hf_token> \
+wget --header="Authorization: Bearer <hf_token>" \
       -O checkpoints/v2-1_768-ema-pruned.ckpt \
       https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
 ```
